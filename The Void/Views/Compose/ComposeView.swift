@@ -34,10 +34,15 @@ struct ComposeView: View {
                 if draftText.isEmpty {
                     Text("Type your thought...")
                         .foregroundStyle(AppTheme.secondaryText)
+                        .font(.body)
                         .padding(.top, 22)
                         .padding(.leading, 18)
                 }
             }
+            .overlay(
+                RoundedRectangle(cornerRadius: 18)
+                    .stroke(AppTheme.elevatedSurface, lineWidth: 1)
+            )
 
             VStack(alignment: .leading, spacing: 10) {
                 Text("Unlock After")
@@ -56,6 +61,10 @@ struct ComposeView: View {
             .padding(14)
             .background(AppTheme.surface)
             .clipShape(RoundedRectangle(cornerRadius: 18))
+            .overlay(
+                RoundedRectangle(cornerRadius: 18)
+                    .stroke(AppTheme.elevatedSurface, lineWidth: 1)
+            )
 
             HStack(spacing: 12) {
                 if showSentConfirmation {
@@ -87,7 +96,9 @@ struct ComposeView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(AppTheme.accent)
                 .disabled(!canSend)
+                .fontWeight(.semibold)
             }
+            .frame(maxWidth: .infinity)
         }
     }
 }

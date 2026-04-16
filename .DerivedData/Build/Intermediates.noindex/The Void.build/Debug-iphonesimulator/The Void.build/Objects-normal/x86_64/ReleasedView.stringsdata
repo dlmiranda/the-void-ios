@@ -6,16 +6,32 @@
         "comment": "",
         "key": "Nothing released yet.",
         "location": {
-          "startingColumn": 22,
-          "startingLine": 25
+          "startingColumn": 26,
+          "startingLine": 26
         }
       },
       {
         "comment": "",
-        "key": "Released %@",
+        "key": "When time passes, your messages arrive here quietly.",
         "location": {
-          "startingColumn": 38,
-          "startingLine": 41
+          "startingColumn": 26,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "Unfavorite",
+        "location": {
+          "startingColumn": 73,
+          "startingLine": 75
+        }
+      },
+      {
+        "comment": "",
+        "key": "Favorite",
+        "location": {
+          "startingColumn": 88,
+          "startingLine": 75
         }
       }
     ]

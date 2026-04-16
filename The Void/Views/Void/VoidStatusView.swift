@@ -16,11 +16,13 @@ struct VoidStatusView: View {
                 title: "Void",
                 subtitle: "You can see what is waiting, not what was said."
             ) {
-                StatusCard(title: "Locked", value: "\(mainViewModel.lockedCount)")
-                StatusCard(
-                    title: "Next Unlock",
-                    value: mainViewModel.nextUnlockTime.map(Self.timeFormatter.string(from:)) ?? "None scheduled"
-                )
+                HStack(spacing: 12) {
+                    StatusCard(title: "Locked", value: "\(mainViewModel.lockedCount)")
+                    StatusCard(
+                        title: "Next Unlock",
+                        value: mainViewModel.nextUnlockTime.map(Self.timeFormatter.string(from:)) ?? "None"
+                    )
+                }
 
                 if mainViewModel.lockedMessages.isEmpty {
                     EmptyVoidCard()
@@ -60,6 +62,9 @@ struct VoidStatusView: View {
         if hours > 0 {
             return "\(hours)h \(minutes)m remaining"
         }
+        if remainingSeconds > 0 && minutes == 0 {
+            return "<1m remaining"
+        }
         return "\(minutes)m remaining"
     }
 }
@@ -71,15 +76,21 @@ private struct StatusCard: View {
     var body: some View {
         HStack {
             Text(title)
+                .font(.caption.weight(.semibold))
                 .foregroundStyle(AppTheme.secondaryText)
             Spacer()
             Text(value)
-                .font(.title3.bold())
+                .font(.headline.weight(.semibold))
                 .foregroundStyle(AppTheme.primaryText)
+                .multilineTextAlignment(.trailing)
         }
         .padding()
         .background(AppTheme.surface)
         .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(AppTheme.elevatedSurface, lineWidth: 1)
+        )
     }
 }
 
@@ -96,6 +107,10 @@ private struct EmptyVoidCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.surface)
         .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(AppTheme.elevatedSurface, lineWidth: 1)
+        )
     }
 }
 
@@ -119,7 +134,7 @@ private struct LockedMessageCard: View {
 
             Text("Unlocks \(Self.timestampFormatter.string(from: unlockDate))")
                 .font(.caption)
-                .foregroundStyle(AppTheme.secondaryText)
+                .foregroundStyle(AppTheme.mutedText)
 
             Text(remaining)
                 .font(.caption.weight(.semibold))
@@ -129,6 +144,10 @@ private struct LockedMessageCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.surface)
         .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(AppTheme.elevatedSurface, lineWidth: 1)
+        )
     }
 }
 

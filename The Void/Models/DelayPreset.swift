@@ -35,11 +35,15 @@ enum DelayPreset: String, CaseIterable, Identifiable, Codable {
     }
 
     static var allPresets: [DelayPreset] {
-        [.twoMinutes, .oneHour, .tonight, .tomorrow, .threeDays, .oneWeek]
+        var presets: [DelayPreset] = [.oneHour, .tonight, .tomorrow, .threeDays, .oneWeek]
+#if DEBUG
+        presets.insert(.twoMinutes, at: 0)
+#endif
+        return presets
     }
 
     static var composePresets: [DelayPreset] {
-        [.oneHour, .tonight, .tomorrow, .threeDays, .oneWeek]
+        [.twoMinutes, .oneHour, .tonight, .tomorrow, .threeDays, .oneWeek]
     }
 
     static var defaultPreset: DelayPreset {

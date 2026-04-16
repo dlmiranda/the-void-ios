@@ -14,9 +14,12 @@ final class MainViewModel: ObservableObject {
     @Published private(set) var releasedMessages: [VoidMessage] = []
     @Published private(set) var nextUnlockTime: Date?
     @Published private(set) var lockedCount: Int = 0
+    @Published private(set) var lastPersistenceError: String?
 
     private let messageStore: MessageStore
     private var cancellables = Set<AnyCancellable>()
+    private var isAddInProgress = false
+    private static let maxMessageLength = 2000
 
     init(messageStore: MessageStore = MessageStore()) {
         self.messageStore = messageStore
@@ -28,7 +31,7 @@ final class MainViewModel: ObservableObject {
             .store(in: &cancellables)
 
         // Lightweight time refresh so locked items move to released as time passes.
-        Timer.publish(every: 30, on: .main, in: .common)
+        Timer.publish(every: 10, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 self?.refreshTimeBasedState()
@@ -40,24 +43,52 @@ final class MainViewModel: ObservableObject {
 
     @discardableResult
     func addMessage(text: String, delayPreset: DelayPreset, now: Date = Date()) -> VoidMessage? {
+        guard !isAddInProgress else { return nil }
+
         let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedText.isEmpty else { return nil }
+        guard trimmedText.count <= Self.maxMessageLength else { return nil }
 
+        isAddInProgress = true
+        defer { isAddInProgress = false }
         let message = VoidMessage(
             text: trimmedText,
             createdAt: now,
             unlockAt: delayPreset.unlockDate(from: now)
         )
-        messageStore.add(message)
+        let didSave = messageStore.add(message)
+        if !didSave {
+            lastPersistenceError = "Could not save your message locally."
+            return nil
+        }
+        lastPersistenceError = nil
         return message
     }
 
     func clearAllMessages() {
-        messageStore.clearAll()
+        let didSave = messageStore.clearAll()
+        if !didSave {
+            lastPersistenceError = "Could not clear local messages."
+        } else {
+            lastPersistenceError = nil
+        }
+    }
+
+    func toggleFavorite(for messageID: UUID) {
+        let didSave = messageStore.toggleFavorite(messageID: messageID)
+        if !didSave {
+            lastPersistenceError = "Could not update favorite."
+        } else {
+            lastPersistenceError = nil
+        }
     }
 
     func refreshTimeBasedState(now: Date = Date()) {
         updateDerivedState(from: messages, now: now)
+    }
+
+    func clearPersistenceError() {
+        lastPersistenceError = nil
     }
 
     private func updateDerivedState(from allMessages: [VoidMessage], now: Date = Date()) {

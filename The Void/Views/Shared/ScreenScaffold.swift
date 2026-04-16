@@ -17,10 +17,10 @@ struct ScreenScaffold<Content: View>: View {
             AppTheme.background
                 .ignoresSafeArea()
 
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 22) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(title)
-                        .font(.largeTitle.bold())
+                        .font(.system(.largeTitle, design: .rounded, weight: .bold))
                         .foregroundStyle(AppTheme.primaryText)
                     Text(subtitle)
                         .font(.subheadline)
@@ -31,7 +31,9 @@ struct ScreenScaffold<Content: View>: View {
 
                 Spacer()
             }
-            .padding(20)
+            .padding(.horizontal, 20)
+            .padding(.top, 16)
+            .padding(.bottom, 12)
         }
     }
 }

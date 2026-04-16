@@ -22,27 +22,61 @@ final class MessageStore: ObservableObject {
         load()
     }
 
-    func add(_ message: VoidMessage) {
+    @discardableResult
+    func add(_ message: VoidMessage) -> Bool {
         messages.insert(message, at: 0)
-        save()
+        return save()
     }
 
-    func clearAll() {
+    @discardableResult
+    func clearAll() -> Bool {
         messages = []
-        save()
+        return save()
+    }
+
+    @discardableResult
+    func toggleFavorite(messageID: UUID) -> Bool {
+        guard let index = messages.firstIndex(where: { $0.id == messageID }) else {
+            return false
+        }
+
+        let original = messages[index]
+        let current = original.isFavorite ?? false
+        messages[index].isFavorite = !current
+
+        if save() {
+            return true
+        }
+
+        messages[index] = original
+        return false
     }
 
     private func load() {
-        guard let data = try? Data(contentsOf: fileURL),
-              let decoded = try? decoder.decode([VoidMessage].self, from: data) else {
+        guard FileManager.default.fileExists(atPath: fileURL.path) else {
             messages = []
             return
         }
-        messages = decoded
+
+        do {
+            let data = try Data(contentsOf: fileURL)
+            messages = try decoder.decode([VoidMessage].self, from: data)
+        } catch {
+            // Keep startup resilient but log failures for debugging data issues.
+            print("MessageStore load failed: \(error.localizedDescription)")
+            messages = []
+        }
     }
 
-    private func save() {
-        guard let data = try? encoder.encode(messages) else { return }
-        try? data.write(to: fileURL, options: [.atomic])
+    @discardableResult
+    private func save() -> Bool {
+        do {
+            let data = try encoder.encode(messages)
+            try data.write(to: fileURL, options: [.atomic])
+            return true
+        } catch {
+            print("MessageStore save failed: \(error.localizedDescription)")
+            return false
+        }
     }
 }

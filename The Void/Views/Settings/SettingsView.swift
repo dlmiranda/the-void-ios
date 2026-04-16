@@ -16,9 +16,9 @@ struct SettingsView: View {
             title: "Settings",
             subtitle: "Minimal controls for this local-only MVP."
         ) {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text("The Void")
-                    .font(.title3.bold())
+                    .font(.title3.weight(.semibold))
                     .foregroundStyle(AppTheme.primaryText)
 
                 Text("Send a thought into The Void, and it stays hidden until the time you chose has passed.")
@@ -32,14 +32,19 @@ struct SettingsView: View {
             .padding()
             .background(AppTheme.surface)
             .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(AppTheme.elevatedSurface, lineWidth: 1)
+            )
 
             Button(role: .destructive) {
                 showClearConfirmation = true
             } label: {
                 Text("Clear All Local Data")
+                    .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.bordered)
+            .buttonStyle(.borderedProminent)
             .tint(.red)
             .alert("Clear all local data?", isPresented: $showClearConfirmation) {
                 Button("Cancel", role: .cancel) {}
