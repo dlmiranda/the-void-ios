@@ -20,18 +20,18 @@
       },
       {
         "comment": "",
-        "key": "Unfavorite",
+        "key": "Unfavorite message",
         "location": {
-          "startingColumn": 73,
-          "startingLine": 75
+          "startingColumn": 89,
+          "startingLine": 57
         }
       },
       {
         "comment": "",
-        "key": "Favorite",
+        "key": "Favorite message",
         "location": {
-          "startingColumn": 88,
-          "startingLine": 75
+          "startingColumn": 112,
+          "startingLine": 57
         }
       }
     ]

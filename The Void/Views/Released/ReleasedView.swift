@@ -2,7 +2,7 @@
 //  ReleasedView.swift
 //  The Void
 //
-//  Purpose: Placeholder released screen where unlocked messages will appear.
+//  Purpose: Read-only timeline of messages whose unlock time has passed.
 //
 
 import SwiftUI
@@ -45,9 +45,16 @@ struct ReleasedView: View {
                             VStack(alignment: .leading, spacing: 10) {
                                 HStack {
                                     Spacer()
-                                    Image(systemName: (message.isFavorite ?? false) ? "star.fill" : "star")
-                                        .font(.caption)
-                                        .foregroundStyle((message.isFavorite ?? false) ? Color.yellow : AppTheme.mutedText)
+                                    Button {
+                                        mainViewModel.toggleFavorite(for: message.id)
+                                    } label: {
+                                        Image(systemName: (message.isFavorite ?? false) ? "star.fill" : "star")
+                                            .font(.caption)
+                                            .foregroundStyle((message.isFavorite ?? false) ? Color.yellow : AppTheme.mutedText)
+                                            .padding(6)
+                                    }
+                                    .buttonStyle(.plain)
+                                    .accessibilityLabel((message.isFavorite ?? false) ? "Unfavorite message" : "Favorite message")
                                 }
 
                                 Text(message.text)
@@ -67,17 +74,6 @@ struct ReleasedView: View {
                                 RoundedRectangle(cornerRadius: 16)
                                     .stroke(AppTheme.elevatedSurface, lineWidth: 1)
                             )
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                Button {
-                                    mainViewModel.toggleFavorite(for: message.id)
-                                } label: {
-                                    Label(
-                                        (message.isFavorite ?? false) ? "Unfavorite" : "Favorite",
-                                        systemImage: (message.isFavorite ?? false) ? "star.slash" : "star"
-                                    )
-                                }
-                                .tint((message.isFavorite ?? false) ? .gray : .yellow)
-                            }
                         }
                     }
                     .padding()

@@ -2,7 +2,7 @@
 //  ComposeView.swift
 //  The Void
 //
-//  Purpose: Placeholder compose screen for writing and sending thoughts.
+//  Purpose: Main writing surface for creating and sending delayed messages.
 //
 
 import SwiftUI

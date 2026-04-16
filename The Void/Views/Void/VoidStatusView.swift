@@ -2,7 +2,7 @@
 //  VoidStatusView.swift
 //  The Void
 //
-//  Purpose: Placeholder status dashboard for hidden and released totals.
+//  Purpose: Metadata-only view of locked messages without revealing content.
 //
 
 import SwiftUI
