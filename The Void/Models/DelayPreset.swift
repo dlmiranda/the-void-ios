@@ -7,16 +7,70 @@
 
 import Foundation
 
-struct DelayPreset: Identifiable, Hashable {
-    let id: String
-    let title: String
-    let timeInterval: TimeInterval
+enum DelayPreset: String, CaseIterable, Identifiable, Codable {
+    case oneHour
+    case tonight
+    case tomorrow
+    case threeDays
+    case oneWeek
 
-    static let allPresets: [DelayPreset] = [
-        DelayPreset(id: "ten-minutes", title: "10 Minutes", timeInterval: 10 * 60),
-        DelayPreset(id: "one-hour", title: "1 Hour", timeInterval: 60 * 60),
-        DelayPreset(id: "one-day", title: "1 Day", timeInterval: 24 * 60 * 60)
-    ]
+    var id: String { rawValue }
 
-    static let defaultPreset: DelayPreset = allPresets[1]
+    var title: String {
+        switch self {
+        case .oneHour:
+            return "1 Hour"
+        case .tonight:
+            return "Tonight"
+        case .tomorrow:
+            return "Tomorrow"
+        case .threeDays:
+            return "3 Days"
+        case .oneWeek:
+            return "1 Week"
+        }
+    }
+
+    static var allPresets: [DelayPreset] {
+        [.oneHour, .tonight, .tomorrow, .threeDays, .oneWeek]
+    }
+
+    static var defaultPreset: DelayPreset {
+        .oneHour
+    }
+
+    func unlockDate(from date: Date = Date(), calendar: Calendar = .current) -> Date {
+        switch self {
+        case .oneHour:
+            return date.addingTimeInterval(60 * 60)
+        case .threeDays:
+            return date.addingTimeInterval(3 * 24 * 60 * 60)
+        case .oneWeek:
+            return date.addingTimeInterval(7 * 24 * 60 * 60)
+        case .tonight:
+            return tonightUnlockDate(from: date, calendar: calendar)
+        case .tomorrow:
+            return tomorrowUnlockDate(from: date, calendar: calendar)
+        }
+    }
+
+    private func tonightUnlockDate(from date: Date, calendar: Calendar) -> Date {
+        let ninePMToday = calendar.date(
+            bySettingHour: 21,
+            minute: 0,
+            second: 0,
+            of: date
+        ) ?? date
+
+        if ninePMToday > date {
+            return ninePMToday
+        }
+
+        return calendar.date(byAdding: .day, value: 1, to: ninePMToday) ?? date
+    }
+
+    private func tomorrowUnlockDate(from date: Date, calendar: Calendar) -> Date {
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: date) ?? date
+        return calendar.startOfDay(for: tomorrow)
+    }
 }

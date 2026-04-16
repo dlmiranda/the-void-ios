@@ -10,9 +10,11 @@ import SwiftUI
 // Purpose: App entry point that launches the root tab interface.
 @main
 struct The_VoidApp: App {
+    @StateObject private var messageStore = MessageStore()
+
     var body: some Scene {
         WindowGroup {
-            RootTabView()
+            RootTabView(messageStore: messageStore)
         }
     }
 }

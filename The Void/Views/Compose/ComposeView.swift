@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ComposeView: View {
-    @StateObject private var viewModel = ComposeViewModel()
+    @StateObject private var viewModel: ComposeViewModel
+
+    init(messageStore: MessageStore) {
+        _viewModel = StateObject(wrappedValue: ComposeViewModel(messageStore: messageStore))
+    }
 
     var body: some View {
         ScreenScaffold(
@@ -25,22 +29,25 @@ struct ComposeView: View {
 
             Picker("Delay", selection: $viewModel.selectedPreset) {
                 ForEach(DelayPreset.allPresets) { preset in
-                    Text(preset.title).tag(preset)
+                    Text(preset.title)
+                        .tag(preset)
                 }
             }
             .pickerStyle(.segmented)
+            .colorScheme(.dark)
 
             Button("Send to The Void") {
-                // Intentionally empty in scaffold phase.
+                _ = viewModel.send()
             }
             .buttonStyle(.borderedProminent)
             .tint(AppTheme.accent)
+            .disabled(!viewModel.canSend)
         }
     }
 }
 
 struct ComposeView_Previews: PreviewProvider {
     static var previews: some View {
-        ComposeView()
+        ComposeView(messageStore: MessageStore())
     }
 }

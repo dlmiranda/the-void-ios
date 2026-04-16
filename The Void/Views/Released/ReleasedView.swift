@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ReleasedView: View {
-    @StateObject private var viewModel = ReleasedViewModel()
+    @StateObject private var viewModel: ReleasedViewModel
+
+    init(messageStore: MessageStore) {
+        _viewModel = StateObject(wrappedValue: ReleasedViewModel(messageStore: messageStore))
+    }
 
     var body: some View {
         ScreenScaffold(
@@ -24,15 +28,24 @@ struct ReleasedView: View {
                     .background(AppTheme.surface)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
             } else {
-                Text("Released messages will show here.")
-                    .foregroundStyle(AppTheme.primaryText)
+                ForEach(viewModel.releasedMessages) { message in
+                    Text(message.text)
+                        .foregroundStyle(AppTheme.primaryText)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(AppTheme.surface)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                }
             }
+        }
+        .onAppear {
+            viewModel.refresh()
         }
     }
 }
 
 struct ReleasedView_Previews: PreviewProvider {
     static var previews: some View {
-        ReleasedView()
+        ReleasedView(messageStore: MessageStore())
     }
 }

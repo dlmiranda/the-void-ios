@@ -1,6 +1,7 @@
 /Users/davidmiranda/Desktop/iOSApp/The\ Void/The\ Void/Models/AppSettings.swift
 /Users/davidmiranda/Desktop/iOSApp/The\ Void/The\ Void/Models/DelayPreset.swift
 /Users/davidmiranda/Desktop/iOSApp/The\ Void/The\ Void/Models/VoidMessage.swift
+/Users/davidmiranda/Desktop/iOSApp/The\ Void/The\ Void/Services/MessageStore.swift
 /Users/davidmiranda/Desktop/iOSApp/The\ Void/The\ Void/Utilities/AppTheme.swift
 /Users/davidmiranda/Desktop/iOSApp/The\ Void/The\ Void/ViewModels/ComposeViewModel.swift
 /Users/davidmiranda/Desktop/iOSApp/The\ Void/The\ Void/ViewModels/ReleasedViewModel.swift

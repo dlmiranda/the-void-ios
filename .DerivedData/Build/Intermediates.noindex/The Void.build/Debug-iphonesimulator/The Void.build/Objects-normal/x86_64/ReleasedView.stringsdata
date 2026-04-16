@@ -7,15 +7,7 @@
         "key": "Nothing released yet.",
         "location": {
           "startingColumn": 22,
-          "startingLine": 19
-        }
-      },
-      {
-        "comment": "",
-        "key": "Released messages will show here.",
-        "location": {
-          "startingColumn": 22,
-          "startingLine": 27
+          "startingLine": 23
         }
       }
     ]

@@ -22,11 +22,13 @@ struct SettingsView: View {
 
                 Picker("Default Delay", selection: $viewModel.selectedDefaultPreset) {
                     ForEach(DelayPreset.allPresets) { preset in
-                        Text(preset.title).tag(preset)
+                        Text(preset.title)
+                            .tag(preset)
                     }
                 }
                 .pickerStyle(.menu)
-                .tint(AppTheme.primaryText)
+                .tint(AppTheme.secondaryText)
+                .colorScheme(.dark)
             }
             .padding()
             .background(AppTheme.surface)
