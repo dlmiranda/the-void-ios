@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+// Purpose: App entry point that launches the root tab interface.
 @main
 struct The_VoidApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootTabView()
         }
     }
 }
