@@ -1,0 +1,16 @@
+{
+  "source": "/Users/davidmiranda/Desktop/iOSApp/The Void/The Void/Views/Shared/ScreenScaffold.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Content",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 42
+        }
+      }
+    ]
+  },
+  "version": 1
+}

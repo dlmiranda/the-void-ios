@@ -1,0 +1,24 @@
+{
+  "source": "/Users/davidmiranda/Desktop/iOSApp/The Void/The Void/Views/Settings/SettingsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Default Delay",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 19
+        }
+      },
+      {
+        "comment": "",
+        "key": "Default Delay",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 23
+        }
+      }
+    ]
+  },
+  "version": 1
+}

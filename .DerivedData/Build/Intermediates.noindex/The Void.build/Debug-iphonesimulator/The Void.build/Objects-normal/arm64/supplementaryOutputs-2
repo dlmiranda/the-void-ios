@@ -1,0 +1,23 @@
+{
+  "/Users/davidmiranda/Desktop/iOSApp/The Void/The Void/Models/AppSettings.swift" : {
+    "const-values" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/AppSettings.swiftconstvalues",
+    "dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/AppSettings.d",
+    "diagnostics" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/AppSettings.dia",
+    "object" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/AppSettings.o",
+    "swift-dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/AppSettings.swiftdeps"
+  },
+  "/Users/davidmiranda/Desktop/iOSApp/The Void/The Void/Models/DelayPreset.swift" : {
+    "const-values" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/DelayPreset.swiftconstvalues",
+    "dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/DelayPreset.d",
+    "diagnostics" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/DelayPreset.dia",
+    "object" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/DelayPreset.o",
+    "swift-dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/DelayPreset.swiftdeps"
+  },
+  "/Users/davidmiranda/Desktop/iOSApp/The Void/The Void/Models/VoidMessage.swift" : {
+    "const-values" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/VoidMessage.swiftconstvalues",
+    "dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/VoidMessage.d",
+    "diagnostics" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/VoidMessage.dia",
+    "object" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/VoidMessage.o",
+    "swift-dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/VoidMessage.swiftdeps"
+  }
+}
