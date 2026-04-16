@@ -8,17 +8,28 @@
 import SwiftUI
 
 struct VoidStatusView: View {
-    @StateObject private var viewModel = VoidStatusViewModel()
+    @ObservedObject var mainViewModel: MainViewModel
 
     var body: some View {
         ScreenScaffold(
             title: "Void",
             subtitle: "A quick snapshot of your hidden thoughts."
         ) {
-            StatusCard(title: "Hidden", value: "\(viewModel.hiddenCount)")
-            StatusCard(title: "Released", value: "\(viewModel.releasedCount)")
+            StatusCard(title: "Hidden", value: "\(mainViewModel.lockedCount)")
+            StatusCard(title: "Released", value: "\(mainViewModel.releasedMessages.count)")
+            StatusCard(
+                title: "Next Unlock",
+                value: mainViewModel.nextUnlockTime.map(Self.timeFormatter.string(from:)) ?? "None"
+            )
         }
     }
+
+    private static let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
 }
 
 private struct StatusCard: View {
@@ -42,6 +53,6 @@ private struct StatusCard: View {
 
 struct VoidStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        VoidStatusView()
+        VoidStatusView(mainViewModel: MainViewModel())
     }
 }

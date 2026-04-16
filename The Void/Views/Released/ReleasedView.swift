@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct ReleasedView: View {
-    @StateObject private var viewModel: ReleasedViewModel
-
-    init(messageStore: MessageStore) {
-        _viewModel = StateObject(wrappedValue: ReleasedViewModel(messageStore: messageStore))
-    }
+    @ObservedObject var mainViewModel: MainViewModel
 
     var body: some View {
         ScreenScaffold(
             title: "Released",
             subtitle: "Thoughts appear here after their unlock time."
         ) {
-            if viewModel.releasedMessages.isEmpty {
+            if mainViewModel.releasedMessages.isEmpty {
                 Text("Nothing released yet.")
                     .font(.headline)
                     .foregroundStyle(AppTheme.secondaryText)
@@ -28,7 +24,7 @@ struct ReleasedView: View {
                     .background(AppTheme.surface)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
             } else {
-                ForEach(viewModel.releasedMessages) { message in
+                ForEach(mainViewModel.releasedMessages) { message in
                     Text(message.text)
                         .foregroundStyle(AppTheme.primaryText)
                         .padding()
@@ -38,14 +34,11 @@ struct ReleasedView: View {
                 }
             }
         }
-        .onAppear {
-            viewModel.refresh()
-        }
     }
 }
 
 struct ReleasedView_Previews: PreviewProvider {
     static var previews: some View {
-        ReleasedView(messageStore: MessageStore())
+        ReleasedView(mainViewModel: MainViewModel())
     }
 }

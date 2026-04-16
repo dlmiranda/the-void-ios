@@ -8,6 +8,7 @@
 import Foundation
 
 enum DelayPreset: String, CaseIterable, Identifiable, Codable {
+    case twoMinutes // Testing only
     case oneHour
     case tonight
     case tomorrow
@@ -18,6 +19,8 @@ enum DelayPreset: String, CaseIterable, Identifiable, Codable {
 
     var title: String {
         switch self {
+        case .twoMinutes:
+            return "2 Minutes"
         case .oneHour:
             return "1 Hour"
         case .tonight:
@@ -32,6 +35,10 @@ enum DelayPreset: String, CaseIterable, Identifiable, Codable {
     }
 
     static var allPresets: [DelayPreset] {
+        [.twoMinutes, .oneHour, .tonight, .tomorrow, .threeDays, .oneWeek]
+    }
+
+    static var composePresets: [DelayPreset] {
         [.oneHour, .tonight, .tomorrow, .threeDays, .oneWeek]
     }
 
@@ -41,6 +48,8 @@ enum DelayPreset: String, CaseIterable, Identifiable, Codable {
 
     func unlockDate(from date: Date = Date(), calendar: Calendar = .current) -> Date {
         switch self {
+        case .twoMinutes:
+            return date.addingTimeInterval(2 * 60)
         case .oneHour:
             return date.addingTimeInterval(60 * 60)
         case .threeDays:

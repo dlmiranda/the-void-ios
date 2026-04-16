@@ -8,46 +8,92 @@
 import SwiftUI
 
 struct ComposeView: View {
-    @StateObject private var viewModel: ComposeViewModel
+    @ObservedObject var mainViewModel: MainViewModel
+    @State private var draftText: String = ""
+    @State private var selectedPreset: DelayPreset = .defaultPreset
+    @State private var showSentConfirmation = false
 
-    init(messageStore: MessageStore) {
-        _viewModel = StateObject(wrappedValue: ComposeViewModel(messageStore: messageStore))
+    private var canSend: Bool {
+        !draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
     var body: some View {
         ScreenScaffold(
             title: "Compose",
-            subtitle: "Type a thought and send it into The Void."
+            subtitle: "Write it once, send it, and let it go."
         ) {
-            TextEditor(text: $viewModel.draftText)
-                .scrollContentBackground(.hidden)
-                .padding(12)
-                .frame(minHeight: 180)
-                .background(AppTheme.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .foregroundStyle(AppTheme.primaryText)
+            ZStack(alignment: .topLeading) {
+                TextEditor(text: $draftText)
+                    .scrollContentBackground(.hidden)
+                    .padding(12)
+                    .frame(minHeight: 260, maxHeight: 320)
+                    .background(AppTheme.surface)
+                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                    .foregroundStyle(AppTheme.primaryText)
 
-            Picker("Delay", selection: $viewModel.selectedPreset) {
-                ForEach(DelayPreset.allPresets) { preset in
-                    Text(preset.title)
-                        .tag(preset)
+                if draftText.isEmpty {
+                    Text("Type your thought...")
+                        .foregroundStyle(AppTheme.secondaryText)
+                        .padding(.top, 22)
+                        .padding(.leading, 18)
                 }
             }
-            .pickerStyle(.segmented)
-            .colorScheme(.dark)
 
-            Button("Send to The Void") {
-                _ = viewModel.send()
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Unlock After")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(AppTheme.secondaryText)
+
+                Picker("Delay", selection: $selectedPreset) {
+                    ForEach(DelayPreset.composePresets) { preset in
+                        Text(preset.title)
+                            .tag(preset)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .colorScheme(.dark)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(AppTheme.accent)
-            .disabled(!viewModel.canSend)
+            .padding(14)
+            .background(AppTheme.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 18))
+
+            HStack(spacing: 12) {
+                if showSentConfirmation {
+                    Text("Sent to The Void")
+                        .font(.footnote)
+                        .foregroundStyle(AppTheme.secondaryText)
+                        .transition(.opacity)
+                }
+
+                Spacer()
+
+                Button("Send") {
+                    let created = mainViewModel.addMessage(
+                        text: draftText,
+                        delayPreset: selectedPreset
+                    )
+                    if created != nil {
+                        draftText = ""
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            showSentConfirmation = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                showSentConfirmation = false
+                            }
+                        }
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(AppTheme.accent)
+                .disabled(!canSend)
+            }
         }
     }
 }
 
 struct ComposeView_Previews: PreviewProvider {
     static var previews: some View {
-        ComposeView(messageStore: MessageStore())
+        ComposeView(mainViewModel: MainViewModel())
     }
 }

@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct RootTabView: View {
-    @ObservedObject var messageStore: MessageStore
+    @ObservedObject var mainViewModel: MainViewModel
 
     var body: some View {
         TabView {
-            ComposeView(messageStore: messageStore)
+            ComposeView(mainViewModel: mainViewModel)
                 .tabItem {
                     Label("Compose", systemImage: "square.and.pencil")
                 }
 
-            ReleasedView(messageStore: messageStore)
+            ReleasedView(mainViewModel: mainViewModel)
                 .tabItem {
                     Label("Released", systemImage: "tray.full")
                 }
 
-            VoidStatusView()
+            VoidStatusView(mainViewModel: mainViewModel)
                 .tabItem {
                     Label("Void", systemImage: "moon.stars")
                 }
@@ -38,6 +38,6 @@ struct RootTabView: View {
 
 struct RootTabView_Previews: PreviewProvider {
     static var previews: some View {
-        RootTabView(messageStore: MessageStore())
+        RootTabView(mainViewModel: MainViewModel())
     }
 }

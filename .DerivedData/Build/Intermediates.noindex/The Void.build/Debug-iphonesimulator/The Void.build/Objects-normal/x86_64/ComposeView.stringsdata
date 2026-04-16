@@ -4,18 +4,42 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "Delay",
+        "key": "Type your thought...",
         "location": {
-          "startingColumn": 20,
-          "startingLine": 30
+          "startingColumn": 26,
+          "startingLine": 35
         }
       },
       {
         "comment": "",
-        "key": "Send to The Void",
+        "key": "Unlock After",
         "location": {
-          "startingColumn": 20,
-          "startingLine": 39
+          "startingColumn": 22,
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delay",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 47
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sent to The Void",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "Send",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 70
         }
       }
     ]
