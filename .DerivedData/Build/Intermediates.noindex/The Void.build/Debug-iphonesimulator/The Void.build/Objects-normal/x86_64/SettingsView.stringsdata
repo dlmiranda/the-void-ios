@@ -4,18 +4,66 @@
     "Localizable": [
       {
         "comment": "",
-        "key": "Default Delay",
+        "key": "Clear all local data?",
         "location": {
-          "startingColumn": 22,
-          "startingLine": 19
+          "startingColumn": 20,
+          "startingLine": 44
         }
       },
       {
         "comment": "",
-        "key": "Default Delay",
+        "key": "The Void",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "Send a thought into The Void, and it stays hidden until the time you chose has passed.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 24
+        }
+      },
+      {
+        "comment": "",
+        "key": "Version %@",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear All Local Data",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
         "location": {
           "startingColumn": 24,
-          "startingLine": 23
+          "startingLine": 45
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "This removes all stored messages from this device.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 50
         }
       }
     ]

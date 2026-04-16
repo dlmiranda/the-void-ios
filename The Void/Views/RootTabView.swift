@@ -27,7 +27,7 @@ struct RootTabView: View {
                     Label("Void", systemImage: "moon.stars")
                 }
 
-            SettingsView()
+            SettingsView(mainViewModel: mainViewModel)
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }

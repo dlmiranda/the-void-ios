@@ -27,6 +27,11 @@ final class MessageStore: ObservableObject {
         save()
     }
 
+    func clearAll() {
+        messages = []
+        save()
+    }
+
     private func load() {
         guard let data = try? Data(contentsOf: fileURL),
               let decoded = try? decoder.decode([VoidMessage].self, from: data) else {

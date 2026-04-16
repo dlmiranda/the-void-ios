@@ -27,6 +27,14 @@ final class MainViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
+        // Lightweight time refresh so locked items move to released as time passes.
+        Timer.publish(every: 30, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                self?.refreshTimeBasedState()
+            }
+            .store(in: &cancellables)
+
         updateDerivedState(from: messageStore.messages)
     }
 
@@ -42,6 +50,14 @@ final class MainViewModel: ObservableObject {
         )
         messageStore.add(message)
         return message
+    }
+
+    func clearAllMessages() {
+        messageStore.clearAll()
+    }
+
+    func refreshTimeBasedState(now: Date = Date()) {
+        updateDerivedState(from: messages, now: now)
     }
 
     private func updateDerivedState(from allMessages: [VoidMessage], now: Date = Date()) {
