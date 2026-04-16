@@ -7,7 +7,15 @@
         "key": "Nothing released yet.",
         "location": {
           "startingColumn": 22,
-          "startingLine": 19
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Released %@",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 41
         }
       }
     ]

@@ -96,6 +96,16 @@
     "swift-dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/ComposeViewModel.swiftdeps",
     "swiftmodule" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/ComposeViewModel~partial.swiftmodule"
   },
+  "/Users/davidmiranda/Desktop/iOSApp/The Void/The Void/ViewModels/MainViewModel.swift" : {
+    "const-values" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/MainViewModel.swiftconstvalues",
+    "dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/MainViewModel.d",
+    "diagnostics" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/MainViewModel.dia",
+    "index-unit-output-path" : "/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/MainViewModel.o",
+    "llvm-bc" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/MainViewModel.bc",
+    "object" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/MainViewModel.o",
+    "swift-dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/MainViewModel.swiftdeps",
+    "swiftmodule" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/MainViewModel~partial.swiftmodule"
+  },
   "/Users/davidmiranda/Desktop/iOSApp/The Void/The Void/ViewModels/ReleasedViewModel.swift" : {
     "const-values" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/ReleasedViewModel.swiftconstvalues",
     "dependencies" : "/Users/davidmiranda/Desktop/iOSApp/The Void/.DerivedData/Build/Intermediates.noindex/The Void.build/Debug-iphonesimulator/The Void.build/Objects-normal/arm64/ReleasedViewModel.d",

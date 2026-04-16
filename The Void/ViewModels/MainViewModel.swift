@@ -45,10 +45,24 @@ final class MainViewModel: ObservableObject {
     }
 
     private func updateDerivedState(from allMessages: [VoidMessage], now: Date = Date()) {
-        messages = allMessages
-        lockedMessages = allMessages.filter { $0.unlockAt > now }
-        releasedMessages = allMessages.filter { $0.unlockAt <= now }
+        messages = allMessages.sorted(by: Self.messageSortAscending)
+
+        lockedMessages = messages
+            .filter { $0.unlockAt > now }
+            .sorted(by: Self.messageSortAscending)
+
+        releasedMessages = messages
+            .filter { $0.unlockAt <= now }
+            .sorted(by: Self.messageSortAscending)
+
         nextUnlockTime = lockedMessages.map(\.unlockAt).min()
         lockedCount = lockedMessages.count
+    }
+
+    private static func messageSortAscending(lhs: VoidMessage, rhs: VoidMessage) -> Bool {
+        if lhs.unlockAt != rhs.unlockAt {
+            return lhs.unlockAt < rhs.unlockAt
+        }
+        return lhs.createdAt < rhs.createdAt
     }
 }

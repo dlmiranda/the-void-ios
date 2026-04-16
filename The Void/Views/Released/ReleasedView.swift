@@ -9,6 +9,12 @@ import SwiftUI
 
 struct ReleasedView: View {
     @ObservedObject var mainViewModel: MainViewModel
+    private static let timestampFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
 
     var body: some View {
         ScreenScaffold(
@@ -24,13 +30,24 @@ struct ReleasedView: View {
                     .background(AppTheme.surface)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
             } else {
-                ForEach(mainViewModel.releasedMessages) { message in
-                    Text(message.text)
-                        .foregroundStyle(AppTheme.primaryText)
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(AppTheme.surface)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 12) {
+                        ForEach(mainViewModel.releasedMessages) { message in
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(message.text)
+                                    .foregroundStyle(AppTheme.primaryText)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                                Text("Released \(Self.timestampFormatter.string(from: message.unlockAt))")
+                                    .font(.caption)
+                                    .foregroundStyle(AppTheme.secondaryText)
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(AppTheme.surface)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                        }
+                    }
                 }
             }
         }
