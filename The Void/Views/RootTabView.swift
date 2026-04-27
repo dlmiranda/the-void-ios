@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct RootTabView: View {
+    private static var hasConfiguredTabBarAppearance = false
+
     private enum Tab: Hashable {
         case compose
         case released
@@ -17,6 +20,21 @@ struct RootTabView: View {
 
     @ObservedObject var mainViewModel: MainViewModel
     @State private var selectedTab: Tab = .compose
+
+    init(mainViewModel: MainViewModel) {
+        self.mainViewModel = mainViewModel
+
+        guard !Self.hasConfiguredTabBarAppearance else { return }
+
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.selectionIndicatorImage = UIImage()
+
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+
+        Self.hasConfiguredTabBarAppearance = true
+    }
 
     var body: some View {
         ZStack(alignment: .top) {
