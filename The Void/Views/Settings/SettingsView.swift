@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct SettingsView: View {
     @ObservedObject var mainViewModel: MainViewModel
     @State private var showClearConfirmation = false
+    @StateObject private var tipJarManager = TipJarManager()
 
     var body: some View {
         ScreenScaffold(
@@ -54,6 +56,11 @@ struct SettingsView: View {
             } message: {
                 Text("This removes all stored messages from this device.")
             }
+
+            supportSection
+        }
+        .task {
+            await tipJarManager.loadProductsIfNeeded()
         }
     }
 
@@ -61,6 +68,72 @@ struct SettingsView: View {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
         return "\(version) (\(build))"
+    }
+
+    @ViewBuilder
+    private var supportSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Support The Void")
+                .font(.headline)
+                .foregroundStyle(AppTheme.primaryText)
+
+            Text("The Void is free to use. If it has helped you, you can leave a small optional tip to support continued development.")
+                .font(.subheadline)
+                .foregroundStyle(AppTheme.secondaryText)
+
+            if tipJarManager.isLoadingProducts {
+                ProgressView()
+                    .tint(AppTheme.secondaryText)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 6)
+            } else {
+                ForEach(tipJarManager.products, id: \.id) { product in
+                    let details = tipJarManager.displayDetails(for: product)
+                    Button {
+                        Task {
+                            await tipJarManager.purchase(product)
+                        }
+                    } label: {
+                        HStack(alignment: .center, spacing: 12) {
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(details.title)
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(AppTheme.primaryText)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                                Text(details.description)
+                                    .font(.caption)
+                                    .foregroundStyle(AppTheme.secondaryText)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+
+                            Text(product.displayPrice)
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(AppTheme.secondaryText)
+                        }
+                        .padding(12)
+                        .background(AppTheme.elevatedSurface)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(tipJarManager.isPurchasing)
+                }
+            }
+
+            if let status = tipJarManager.statusMessage {
+                Text(status)
+                    .font(.footnote)
+                    .foregroundStyle(AppTheme.secondaryText)
+                    .padding(.top, 2)
+            }
+        }
+        .padding()
+        .background(AppTheme.surface)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(AppTheme.elevatedSurface, lineWidth: 1)
+        )
     }
 }
 

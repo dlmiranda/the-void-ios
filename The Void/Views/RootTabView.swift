@@ -47,7 +47,6 @@ struct RootTabView: View {
                     .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
-        .animation(.easeInOut(duration: 0.2), value: mainViewModel.lastPersistenceError)
         .onChange(of: mainViewModel.lastPersistenceError) { _, newValue in
             guard newValue != nil else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
