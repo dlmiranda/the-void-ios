@@ -43,20 +43,6 @@ struct ReleasedView: View {
                     LazyVStack(alignment: .leading, spacing: 12) {
                         ForEach(mainViewModel.releasedMessages) { message in
                             VStack(alignment: .leading, spacing: 10) {
-                                HStack {
-                                    Spacer()
-                                    Button {
-                                        mainViewModel.toggleFavorite(for: message.id)
-                                    } label: {
-                                        Image(systemName: (message.isFavorite ?? false) ? "star.fill" : "star")
-                                            .font(.caption)
-                                            .foregroundStyle((message.isFavorite ?? false) ? Color.yellow : AppTheme.mutedText)
-                                            .padding(6)
-                                    }
-                                    .buttonStyle(.plain)
-                                    .accessibilityLabel((message.isFavorite ?? false) ? "Unfavorite message" : "Favorite message")
-                                }
-
                                 Text(message.text)
                                     .font(.body)
                                     .foregroundStyle(AppTheme.primaryText)

@@ -12,20 +12,17 @@ struct VoidMessage: Identifiable, Codable {
     let text: String
     let createdAt: Date
     let unlockAt: Date
-    var isFavorite: Bool?
 
     init(
         id: UUID = UUID(),
         text: String,
         createdAt: Date = Date(),
-        unlockAt: Date,
-        isFavorite: Bool? = nil
+        unlockAt: Date
     ) {
         self.id = id
         self.text = text
         self.createdAt = createdAt
         self.unlockAt = unlockAt
-        self.isFavorite = isFavorite
     }
 
     var isReleased: Bool {

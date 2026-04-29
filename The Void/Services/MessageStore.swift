@@ -34,24 +34,6 @@ final class MessageStore: ObservableObject {
         return save()
     }
 
-    @discardableResult
-    func toggleFavorite(messageID: UUID) -> Bool {
-        guard let index = messages.firstIndex(where: { $0.id == messageID }) else {
-            return false
-        }
-
-        let original = messages[index]
-        let current = original.isFavorite ?? false
-        messages[index].isFavorite = !current
-
-        if save() {
-            return true
-        }
-
-        messages[index] = original
-        return false
-    }
-
     private func load() {
         guard FileManager.default.fileExists(atPath: fileURL.path) else {
             messages = []

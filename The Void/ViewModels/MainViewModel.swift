@@ -74,15 +74,6 @@ final class MainViewModel: ObservableObject {
         }
     }
 
-    func toggleFavorite(for messageID: UUID) {
-        let didSave = messageStore.toggleFavorite(messageID: messageID)
-        if !didSave {
-            lastPersistenceError = "Could not update favorite."
-        } else {
-            lastPersistenceError = nil
-        }
-    }
-
     func refreshTimeBasedState(now: Date = Date()) {
         updateDerivedState(from: messages, now: now)
     }
