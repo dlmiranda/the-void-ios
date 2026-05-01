@@ -247,6 +247,10 @@
 		5CA9CA6A2F909142004B8B81 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				/* App Store / privacy (The Void): display name on Home Screen & App Store listing should match product name. */
+				INFOPLIST_KEY_CFBundleDisplayName = "The Void";
+				/* Standard encryption only (HTTPS / Apple APIs); simplifies Export Compliance in App Store Connect. */
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -264,7 +268,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "snoballProd.The-Void";
+				/* Reverse-DNS style for Snoball Productions LLC. If this app was already registered in App Store Connect under the previous id, switch back to that identifier here to avoid creating a new app record. */
+				PRODUCT_BUNDLE_IDENTIFIER = com.snoballproductions.thevoid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -279,6 +284,9 @@
 		5CA9CA6B2F909142004B8B81 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				/* Same App Store metadata as Debug; kept in both configs so Archive builds stay aligned. */
+				INFOPLIST_KEY_CFBundleDisplayName = "The Void";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,7 +304,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "snoballProd.The-Void";
+				/* Matches Debug: reverse-DNS for Snoball Productions LLC (revert if an existing ASC app id must be preserved). */
+				PRODUCT_BUNDLE_IDENTIFIER = com.snoballproductions.thevoid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;

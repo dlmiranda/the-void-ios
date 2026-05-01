@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  The Void — privacy manifest (Snoball Productions LLC).
+	  - No tracking, no third-party SDKs, no data sent off-device by this app.
+	  - User content is stored only in the app sandbox (see MessageStore).
+	  - No Required Reason API categories are declared: first-party code does not call
+	    Apple’s “required reason” APIs (e.g. UserDefaults, disk space, file timestamps).
+	  - If future Xcode versions flag linked system code, add only the API categories
+	    the binary actually uses, with matching reason codes from Apple’s documentation.
+	-->
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array/>
+</dict>
+</plist>
