@@ -11,6 +11,9 @@ struct SettingsView: View {
     @ObservedObject var mainViewModel: MainViewModel
     @State private var showClearConfirmation = false
 
+    /// Snoball Productions site; `#privacy` scrolls to the policy section.
+    private static let privacyPolicyURL = URL(string: "https://snoballproductions.com/home#privacy")!
+
     var body: some View {
         ScreenScaffold(
             title: "Settings",
@@ -36,6 +39,26 @@ struct SettingsView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(AppTheme.elevatedSurface, lineWidth: 1)
             )
+
+            Link(destination: Self.privacyPolicyURL) {
+                HStack {
+                    Text("Privacy Policy")
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(AppTheme.primaryText)
+                    Spacer()
+                    Image(systemName: "arrow.up.right.square")
+                        .font(.body)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
+                .padding()
+                .background(AppTheme.surface)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(AppTheme.elevatedSurface, lineWidth: 1)
+                )
+            }
+            .tint(AppTheme.accent)
 
             Button(role: .destructive) {
                 showClearConfirmation = true
